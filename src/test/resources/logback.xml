@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="basedir" value="target"/>
+    <property name="app.name" value="spring-aop"/>
+    <property name="app.layer" value="service"/>
+    <property name="log.dir" value="${basedir}/logs/${app.name}/${app.layer}"/>
+    <property name="max.history" value="30"/>
+
+    <appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.dir}/${app.name}-${app.layer}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${log.dir}/${app.name}-${app.layer}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${max.history}</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%date{"yyyy-MM-dd'T'HH:mm:ss,SSSXXX", UTC}, ${HOSTNAME}, %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="eventAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.dir}/event.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${log.dir}/event.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${max.history}</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%date{"yyyy-MM-dd'T'HH:mm:ss,SSSXXX", UTC}, ${HOSTNAME}, %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="errorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.dir}/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${log.dir}/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${max.history}</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%date{"yyyy-MM-dd'T'HH:mm:ss,SSSXXX", UTC}, ${HOSTNAME}, %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="dataAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.dir}/data.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${log.dir}/data.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${max.history}</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%date{"yyyy-MM-dd'T'HH:mm:ss,SSSXXX", UTC}, ${HOSTNAME}, %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="securityAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.dir}/security.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${log.dir}/security.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${max.history}</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%date{"yyyy-MM-dd'T'HH:mm:ss,SSSXXX", UTC}, ${HOSTNAME}, %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d [%thread] %-4relative [%thread] %-5level %logger{35} - %msg %n
+            </pattern>
+        </encoder>
+    </appender>
+    <logger name="eventlogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="eventAppender"/>
+    </logger>
+    <logger name="errorlogger" additivity="false">
+        <level value="ERROR"/>
+        <appender-ref ref="errorAppender"/>
+    </logger>
+    <logger name="datalogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="dataAppender"/>
+    </logger>
+    <root level="INFO">
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="fileAppender"/>
+    </root>
+</configuration>
