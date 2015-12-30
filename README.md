@@ -1,3 +1,6 @@
+### Status
+[![Build Status](https://travis-ci.org/rrajendran/spring-aop.svg)](https://travis-ci.org/rrajendran/spring-aop)
+
 Spring AOP Example
 ====================
 Intercepts @LogEvent annotation and logs before and after.
